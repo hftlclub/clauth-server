@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from '../../config';
 const ldapjs = require('ldapjs');
 const ssha = require('ssha');
 import { client as ldapClient }  from '../modules/ldap';
@@ -74,7 +74,7 @@ export class UserService {
 
 
     // get one user by uid
-    static async getUserByUid(uid) {
+    static async getUserByUid(uid): Promise<any> {
         return new Promise((resolve, reject) => {
         
             const opts = {

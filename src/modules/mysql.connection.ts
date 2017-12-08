@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-import { config } from '../config';
+import { config } from '../../config';
 
 export class MySQLConnection {
     static conn: any;

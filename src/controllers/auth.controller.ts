@@ -1,11 +1,14 @@
-import { UserService } from '../modules/user.service';
-import { Utils } from '../modules/utils';
-import { config } from '../config';
 import * as express from 'express';
+
+import { Utils } from '../modules/utils';
+import { config } from '../../config';
+import { UserService } from '../modules/user.service';
+import { JwtService } from '../modules/jwt.service';
+import { CredentialsMissingError, CredentialsWrongError } from '../modules/errors';
 
 export class AuthController {
 
-    index(req, res) {
+    index(req: express.Request, res: express.Response) {
         res.send('Auth Server');
     }
 
@@ -17,21 +20,32 @@ export class AuthController {
             const password = body.password;
 
             if(!username || !password) {
-                throw new Error('Username or password missing');
+                throw new CredentialsMissingError();
             }
 
             const passwordCheck = await UserService.checkpassword(username, password);
             if (passwordCheck) {
                 const user = await UserService.getUserByUid(username);
-                res.send(user);
+
+                const payload = {
+                    username: user.username,
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                }
+
+                const jwt = await JwtService.createToken(payload);
+                res.send(jwt);
                 
             } else {
-                const err = new Error('Username or password incorrect');
-                throw err;
+                throw new CredentialsWrongError();
             }
         } catch(e) {
             next(e);
         }
+    }
+
+    async getPublicJWKS(req: express.Request, res: express.Response, next: express.NextFunction) {
+        res.send(await JwtService.getPublicJWKS());
     }
 }
 

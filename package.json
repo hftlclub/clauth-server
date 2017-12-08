@@ -4,13 +4,18 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node ./server.js",
+    "build": "tsc",
     "tsc": "tsc"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "jwk-to-pem": "^1.2.6",
     "ldapjs": "^1.0.1",
     "mysql": "^2.15.0",
+    "node-jose": "^0.11.0",
+    "node-jwk": "^0.1.0",
     "pbkdf2-sha256": "^1.1.0",
     "ssha": "^1.0.1"
   },

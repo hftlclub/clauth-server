@@ -15,6 +15,5 @@ export const config = {
         admindn  : '',
         adminpw  : ''
     },
-    tokenLifetime: 3600,
-    secret: 'loremipsum' // secret the access token is signed with
+    tokenLifetime: 3600
 }

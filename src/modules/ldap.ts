@@ -1,6 +1,6 @@
 import * as ldapjs from 'ldapjs';
 
-import { config } from '../config';
+import { config } from '../../config';
 
 
 export const client = ldapjs.createClient({
