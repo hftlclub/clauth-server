@@ -1,6 +1,7 @@
+import * as ldapjs from 'ldapjs';
+import * as ssha from 'ssha';
+
 import { config } from '../../config';
-const ldapjs = require('ldapjs');
-const ssha = require('ssha');
 import { client as ldapClient }  from '../modules/ldap';
 
 const userattrs = {
