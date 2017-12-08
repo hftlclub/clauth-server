@@ -1,9 +1,9 @@
 {
-  "name": "stecker-auth",
+  "name": "clauth-server",
   "description": "Simple Auth server",
   "version": "0.0.1",
   "scripts": {
-    "start": "node ./server.js",
+    "start": "node server.js",
     "build": "tsc",
     "tsc": "tsc"
   },

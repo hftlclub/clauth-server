@@ -1,4 +1,4 @@
-# stecker-auth
+# clauth-server
 
 Simple Auth server with JWT
 
