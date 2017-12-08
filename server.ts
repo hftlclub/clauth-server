@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 
 import { AuthController } from './src/controllers/auth.controller';
@@ -8,6 +9,7 @@ import { RequestBodyError } from './src/modules/errors';
 const app = express();
 const authCtrl = new AuthController();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 // ROUTES
