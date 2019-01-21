@@ -13,12 +13,12 @@ export class JwtService {
 
         payload = {
             ...payload,
-            kid: kid
+            kid
         }
 
         return jwt.sign(payload, privateKey, {
             algorithm: 'RS256',
-            expiresIn: 3600,
+            expiresIn: config.tokenLifetime,
         });
     }
     

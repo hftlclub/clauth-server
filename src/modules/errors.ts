@@ -6,7 +6,7 @@ export class CredentialsMissingError extends Error {
 }
 
 export class CredentialsWrongError extends Error {
-    status = 400;
+    status = 401;
     constructor() {
         super('Username or password incorrect');
     }

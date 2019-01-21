@@ -1,6 +1,5 @@
 import * as express from 'express';
 
-import { Utils } from '../modules/utils';
 import { config } from '../../config';
 import { UserService } from '../modules/user.service';
 import { JwtService } from '../modules/jwt.service';
@@ -15,9 +14,7 @@ export class AuthController {
     async auth(req: express.Request, res: express.Response, next: express.NextFunction) {
         try {
             const body: AuthRequestBody = req.body;
-        
-            const username = body.username;
-            const password = body.password;
+            const { username, password } = body;
 
             if(!username || !password) {
                 throw new CredentialsMissingError();
@@ -31,10 +28,17 @@ export class AuthController {
                     username: user.username,
                     firstname: user.firstname,
                     lastname: user.lastname,
+                    isAdmin: user.superuser
                 }
 
-                const jwt = await JwtService.createToken(payload);
-                res.send(jwt);
+                const token = await JwtService.createToken(payload);
+
+                const response: TokenResponse = {
+                    token,
+                    expiresIn: config.tokenLifetime,
+                    type: 'Bearer'
+                }
+                res.send(response);
                 
             } else {
                 throw new CredentialsWrongError();
@@ -54,3 +58,9 @@ interface AuthRequestBody {
     username: string;
     password: string;
 }
+
+interface TokenResponse {
+    token: string;
+    expiresIn: number;
+    type: string;
+  }

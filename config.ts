@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 export const config = {
-    port: 3000,
+    port: 3003,
     mysqlCred: {
         host: 'pma.srv3.malcher-server.de',
         user: 'lagersystem',
